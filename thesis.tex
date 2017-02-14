@@ -8,6 +8,8 @@
 
 \begin{document}
 
+\frontmatter
+
 %% PART 1
 %%The title page will be automatically generated and added by the DAIM system
 \input{dedication.tex}		%% Optional
@@ -16,15 +18,36 @@
 \input{summary.tex}		%% Optional
 \input{preface.tex}		%% Optional
 \input{list.tex}			%% Generate TOC, list of tables, and list of figures automatically
-\input{abbreviations.tex}	%% Optional
+%\input{abbreviations.tex}	%% Optional
+
+\cleardoublepage
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\headrulewidth}{0.1ex}
+\renewcommand{\footrulewidth}{0.1ex}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[LE,RO]{\thepage}\renewcommand{\headrulewidth}{0ex}}
+
+\mainmatter
 
 %% PART 3 -- The Chapters
-\input{chapter1.tex}		%% Edit each chapter
-\input{chapter2.tex}
-\input{chapter3.tex}
-\input{chapter4.tex}
-\input{chapter5.tex}
-\input{chapter6.tex}
+\input{intro.tex}		%% Edit each chapter
+\cleardoublepage
+\input{background.tex}
+\cleardoublepage
+\input{related_work.tex}
+\cleardoublepage
+\input{methodology.tex}
+\cleardoublepage
+\input{discussion.tex}
+\cleardoublepage
+\input{conclusion.tex}
+\cleardoublepage
 
 %% PART 4
 \input{references.tex}	%% Edit your references in "mylib.bib"
