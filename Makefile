@@ -24,3 +24,6 @@ add-report: $(PDF)
 
 clean:
 	rm -rf *.aux *.bbl *.blg *dvi *.log *.out *.synctex.gz *.toc *.lot *.lof
+
+remove: clean
+	rm $(PDF)
