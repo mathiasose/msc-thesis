@@ -1,6 +1,4 @@
 \section{Cellular Automata}
-TODO rewrite to not repeat too much of the previous section
-
 \textit{Cellular Automata} (CA) were first invented in the 1940s by von Neumann and Ulam as mathematical models of computation \cite{von-neumann-1966}.
 They were inspired by biological organisms,
 and created a model that could emulate some of their interesting and useful properties,
@@ -11,7 +9,7 @@ the concept of CA became the basis for the field of \textit{Cellular Computing} 
 As the performance of "conventional" computers kept increasing dramatically,
 CC never became the basis for the mainstream computers that we use today,
 but CA and CC remained an area of research by mathematicians and computer scientists,
-part of the larger field of \textit{artificial life}.
+part of the larger field of artificial life.
 As the rate of this growth of performance diminished,
 and parallel computing has shown itself to be difficult in practice,
 some, such as Michael J. Flynn have speculated that CC might be the path forward \cite{flynn-1996} .
@@ -40,6 +38,16 @@ Depending on the starting state of the whole system and the rules,
 it is possible to observe interesting emergent or self-organizing behavior over time and space.
 These interesting CA often find an \textit{attractor} \cite{gershenson-2004, wolfram1986theory}.
 If a sequence of states repeat periodically it is called a \textit{cycle attractor}, and if the CA stabilizes into a permanent state is is called a \textit{point attractor}.
+Figure \ref{fig:example_CA} shows an example of a CA that enters a cyclical attractor.
+Binary CA, with only two possible cell states, are the most commonly seen and studied.
+Greater numbers of cell states is possible, but the increase in degrees of freedom can lead to some problems.
+
+\begin{figure}[h]
+\centering
+\includegraphics[height=0.4\textheight, width=\textwidth, keepaspectratio]{fig/result_figs/generate_mosaic/1}
+\caption[Example CA]{An example binary CA. At timestep 5 the CA state is the same as that in timestep 3, meaning the CA has entered a cyclical attractor with a period of 2 (oscillation).}
+\label{fig:example_CA}
+\end{figure}
 
 %There are many properties of CA and of cellular computing that can be varied to produce different results \cite{sipper-1999}.
 %In this paper we will define some further properties of CA as:
@@ -60,7 +68,7 @@ If a sequence of states repeat periodically it is called a \textit{cycle attract
 %
 %\begin{figure}
 %\centering
-%\includegraphics[width=\columnwidth]{img/110}
+%\includegraphics[width=\columnwidth]{fig/110}
 %\caption{Elementary CA 110
 %(TODO cite \protect\url{https://commons.wikimedia.org/wiki/File:Ca110-interaction.png} properly)}
 %\label{fig:110}
@@ -82,29 +90,121 @@ If a sequence of states repeat periodically it is called a \textit{cycle attract
 Langton \cite{langton-1990} formally defined finite CA as consisting of a finite set of cell states $\Sigma$ of size $K = |\Sigma|$,
 a finite input alphabet $\alpha$, and a transition function $\Delta$.
 Each cell has a $N$-sized neighborhood.
-The number of possible neighborhoods can be expressed by equation \eqref{eq:kn}.
+The number of possible neighborhood states can be expressed by equation \eqref{eq:kn}.
 
 \begin{equation}\label{eq:kn}
     |\alpha| = |\Delta| = |\Sigma^N| = K^N
 \end{equation}
 
-The transition function for a CA must thus encode a mapping of $|\alpha|$ different inputs to one of $K$ states.
+The transition function for a CA must thus encode a mapping of $|\alpha|$ different inputs to one of $K$ cell states.
 The number of possible unique transition functions is thus $K^{(K^N)}$.
+
+\begin{figure}
+\centering
+\begin{subfigure}[t]{.175\columnwidth}
+\centering
+\includegraphics[width=\columnwidth]{fig/VonNeumann}
+\caption{$N=5$ (Von Neumann)}
+\label{fig:neighborhoods_vn}
+\end{subfigure}\hfill%
+\begin{subfigure}[t]{.175\columnwidth}
+\centering
+\includegraphics[width=\columnwidth]{fig/Moore}
+\caption{$N=9$ (Moore)}
+\end{subfigure}\hfill%
+\begin{subfigure}[t]{.175\columnwidth}
+\centering
+\includegraphics[width=\columnwidth]{fig/LCR}
+\caption{$N=3$}
+\end{subfigure}\hfill%
+\begin{subfigure}[t]{.40\columnwidth}
+\centering
+\includegraphics[width=\columnwidth]{fig/LLLCRRR}
+\caption{$N=7$}
+\end{subfigure}\hfill%
+
+\caption[Some CA neighborhoods]{Some examples of common neighborhood shapes. The two common 2D shapes are named for John von Neumann and Edward F. Moore.
+}
+\label{fig:neighborhoods}
+\end{figure}
 
 Traditionally $\Delta$ has been encoded as a complete mapping $\Delta: \Sigma^N \rightarrow \Sigma$, which can be implemented as a lookup table.
 When working with non-trivial CA where both $K$ and $N$ can be relatively large numbers,
 it becomes a problem both to store the mapping $\Delta$ in an efficient way,
 and the space of possible $\Delta$ becomes too large to be explored by exhaustive enumeration.
+Table \ref{tbl:example_CA} shows an example of a table encoding for the CA in Figure \ref{fig:example_CA}.
+
+\begin{table}
+    \centering
+    \caption[Example table-based transition rule]{An example table-based transition rule that exhibits the same behavior as seen in Figure \ref{fig:example_CA}. $N=5, K=2$ gives $|\alpha|=32$, the height of the table. The neighborhood shape is "Von Neumann" (Figure \ref{fig:neighborhoods_vn}).}
+    \begin{tabular}{lllll|l}
+    North (t=n) & West (t=n) & Center (t=n) & East (t=n) & South (t=n) & Center (t=n+1) \\ \hline
+    0      & 0      & 0      & 0      & 0      & 0        \\
+    0      & 0      & 0      & 0      & 1      & 1        \\
+    0      & 0      & 0      & 1      & 0      & 1        \\
+    0      & 0      & 0      & 1      & 1      & 1        \\
+    0      & 0      & 1      & 0      & 0      & 0        \\
+    0      & 0      & 1      & 0      & 1      & 0        \\
+    0      & 0      & 1      & 1      & 0      & 0        \\
+    0      & 0      & 1      & 1      & 1      & 0        \\
+    0      & 1      & 0      & 0      & 0      & 1        \\
+    0      & 1      & 0      & 0      & 1      & 1        \\
+    0      & 1      & 0      & 1      & 0      & 1        \\
+    0      & 1      & 0      & 1      & 1      & 1        \\
+    0      & 1      & 1      & 0      & 0      & 0        \\
+    0      & 1      & 1      & 0      & 1      & 0        \\
+    0      & 1      & 1      & 1      & 0      & 0        \\
+    0      & 1      & 1      & 1      & 1      & 0        \\
+    1      & 0      & 0      & 0      & 0      & 1        \\
+    1      & 0      & 0      & 0      & 1      & 1        \\
+    1      & 0      & 0      & 1      & 0      & 1        \\
+    1      & 0      & 0      & 1      & 1      & 1        \\
+    1      & 0      & 1      & 0      & 0      & 0        \\
+    1      & 0      & 1      & 0      & 1      & 0        \\
+    1      & 0      & 1      & 1      & 0      & 0        \\
+    1      & 0      & 1      & 1      & 1      & 0        \\
+    1      & 1      & 0      & 0      & 0      & 1        \\
+    1      & 1      & 0      & 0      & 1      & 1        \\
+    1      & 1      & 0      & 1      & 0      & 1        \\
+    1      & 1      & 0      & 1      & 1      & 1        \\
+    1      & 1      & 1      & 0      & 0      & 0        \\
+    1      & 1      & 1      & 0      & 1      & 0        \\
+    1      & 1      & 1      & 1      & 0      & 0        \\
+    1      & 1      & 1      & 1      & 1      & 0        \\
+    \end{tabular}
+    \label{tbl:example_CA}
+\end{table}
+
+\subsection{The $\lambda$ Parameter and the Edge of Chaos}
 
 In studies of CA transition rules, it has been found that most rules lead to uninteresting behavior,
 either falling into an "order" which is either static or repeating periodically,
 or into chaos, where all useful information is quickly lost in noise.
 It is in the critical border region between these behaviors that interesting behaviors and computation can occur \cite{langton-1990}.
+
+In Langton's study \cite{langton-1990} he devised a metric to describe if a rule is ordered, chaotic or in between, which he called $\lambda$.
+It is defined by $K$, $N$ and the number of transitions that goes to the quiescent state, $n$.
+\begin{equation}\label{eq:lambda}
+    \lambda = \frac{K^N - n}{K^N}
+\end{equation}
+
+In the study Langton investigated the $\lambda$ of 1D binary CA, but the measure can be used on any CA.
+The 2D binary transition function shown in Table \ref{tbl:example_CA} has 17 input combinations that lead to the quiescent ($0$) state ($n = 17$), and thus $\lambda = 0.46875$.
+
+
 But in order to find these interesting $\Delta$, a smart search heuristic is needed.
 
-\subsection{The $\lambda$ Parameter and the Edge of Chaos}
+
 TODO
 
-\subsection{Morphology Problems}
-TODO
+\subsection{CA Problems}
+There are many kinds of problems that can be solved with CA.
+One class of problems is called \textit{morphology problems}.
+In these problems, the goal is for the CA to create some kind of complex structure.
+This can for example be \textit{morphogenesis}, where a simple structure is over time transformed into a more complex one,
+or it can be \textit{replication}, where some complex structure present initially must be copied.
 
+Another class of problems can be called \textit{information problems} (TODO is there a more appropriate term?).
+In this kind of problem the goal can be to compute some result based on the initial state, or to transmit information about state from one end to another.
+
+TODO citations

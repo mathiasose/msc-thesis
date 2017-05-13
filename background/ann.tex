@@ -1,20 +1,37 @@
 \section{Artificial Neural Networks}
-TODO resection
+TODO rewrite somewhat
 
 \textit{Artificial Neural Networks} (ANNs) \cite[Chapter 1]{bengio2015deep} have been used in many different applications related to artificial life and intelligence, such as robotics or machine learning.
 An ANN is a directed graph structure, with vertices (referred to as neurons) and edges (referred to as connections).
+Input values are fed into the first layer of neurons and passed through the connections to the next layers.
+All the connections to one neuron is added together and inputted to the neuron.
+In each neuron some activation function transforms the input to a new value, and in each connection the value is scaled by some weight.
+
 This is inspired by neuroscience, with the brain consisting of neurons and synapse connections.
 ANNs are useful because they consists of many discrete parts that can be individually or collectively tuned by some adaptive process,
 and are easily expanded.
 The \textit{universal approximation theorem} \cite{Hornik1989359} shows that relatively simple ANNs can approximate a wide variety of functions,
 and the field of deep learning shows that a large complex structure with enough tuning can perform very complex tasks, such as image classification or natural language processing.
+Figure \ref{fig:ann} shows an example ANN with three inputs and two outputs.
+An example of a use case for this structure could be to control a robot with three sensors and two motors.
 
+\begin{figure}
+\centering
+\includegraphics[width=.5\columnwidth]{fig/Artificial_neural_network}
+\caption[Example ANN]{
+    An example ANN with three input neurons, one bias neuron, three hidden neurons and two output neurons.
+    Each connection between neurons also has some weight that scales the value being passed.
+}
+\label{fig:ann}
+\end{figure}
+
+\subsection{Compositional Pattern Producing Networks}
 A \textit{Compositional Pattern Producing Network} (CPPN) is an \textit{artificial development encoding} introduced by Stanley in 2007 \cite{stanley-2007}.
 CPPNs are structurally similar to ANNs, but differ in the use case.
 Various techniques designed for ANN development and analysis may also be used for CPPNs.
 
-A CPPN consists of a set of nodes with activation functions, weights and biases, as well as weighted connections between nodes.
-Like in an ANN, external values are inputted to the first layer, then undergo transformation by weights and activation functions before being outputted by the final layer.
+Just like an ANN, a CPPN consists of a set of nodes with activation functions, weights and biases, as well as weighted connections between nodes.
+Also like in an ANN, external values are inputted to the first layer, then undergo transformation by weights and activation functions before being outputted by the final layer.
 This can be thought of as a composition of functions producing a pattern, hence the name.
 An ANN is usually structured with neurons of the same activation functions,
 arranged in layers,
@@ -39,12 +56,12 @@ such as machine learning \cite{d2008generative} and robot control \cite{risi2013
 \centering
 \begin{subfigure}[b]{.25\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/2-cppn}
+\includegraphics[height=5cm, keepaspectratio]{fig/2-cppn}
 \caption{~}
 \end{subfigure}\hfill%
 \begin{subfigure}[b]{.65\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/cppn_pattern}
+\includegraphics[height=5cm, keepaspectratio]{fig/cppn_pattern}
 \caption{~}
 \end{subfigure}
 
@@ -63,6 +80,3 @@ The discrete coordinates of (b) are first normalized to $[-1.0, 1.0]$ and then m
 %Because the space of possible CPPN structures is unconstrained,
 %the solution space is unbounded, so some intelligent search heuristic is needed in order to find good $\Delta$ for a particular problem.
 
-
-\subsection{CPPNs}
-TODO

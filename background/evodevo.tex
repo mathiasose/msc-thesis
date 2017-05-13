@@ -61,14 +61,14 @@ allowing them time to adjust before being evaluated and, if performing poorly, b
 
 \begin{figure}
 \centering
-\begin{subfigure}[t]{.63\columnwidth}
+\begin{subfigure}[t]{.5\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/NEAT_gt}
+\includegraphics[height=5cm, keepaspectratio]{fig/NEAT_gt}
 \caption{Genotype}
 \end{subfigure}\hfill%
-\begin{subfigure}[t]{.33\columnwidth}
+\begin{subfigure}[t]{.5\columnwidth}
 \centering
-\includegraphics[width=\columnwidth]{fig/NEAT_pt}
+\includegraphics[height=5cm, keepaspectratio]{fig/NEAT_pt}
 \caption{Phenotype}
 \end{subfigure}
 
@@ -79,10 +79,31 @@ This example only shows the topology that the genotype encodes, leaving out the 
 \label{fig:neat}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth, keepaspectratio]{fig/NEAT_mutation}
+\caption[Example of NEAT mutation]{
+    An illustrated example of NEAT mutation starting with a basic network of only two inputs and one output.
+    Through the sequence neurons and connections are added until the network is equal to that in Figure \ref{fig:neat}.
+    This example shows only mutation of genomes, leaving out the crossover operation which is also part of NEAT.
+    }
+\label{fig:neat_mutation}
+\end{figure}
+
+
 One notable use case of NEAT is called \textit{HyperNEAT} \cite{stanley2009hypercube}.
 In this process, NEAT is used to evolve CPPNs whose output determine the topology of ANNs.
 This is useful because it allows the ANN to scale easily, since the CPPN can just take more input and output more topology.
 If the evolved CPPN has useful output at a small scale, it should also have a useful output at a large scale.
 
 \subsection{Novelty Search}
-TODO
+\textit{Novelty search} is another genetic algorithm variant, introduced by Joel Lehmann and Kenneth O. Stanley in 2008 \cite{lehman-2008}.
+It is good at \textit{deceptive} tasks, where local maximas in the fitness landscape do not lead to the global maximum, and thus "deceives" conventional algorithms.
+Novelty search avoids this by eschewing the fitness measure entirely, and instead rewards \textit{innovation}, giving higher scores to genotypes that exhibit previously unseen behavior.
+To find what behavior is new, an archive of seen behaviors is kept.
+A \textit{distance metric} must be selected that is appropriate for the problem at hand.
+For example, if the behavior of the phenotypes produces strings, an \textit{edit distance} measure such as the \textit{Levenshtein distance} can be used.
+For each genotype the k nearest neighbors are found, and the average of these distances can be used as the \textit{novelty metric}.
+If a new behavior is sufficiently novel, it is added to the archive.
+
+TODO a bit more?

@@ -8,7 +8,47 @@ Other experiments target problems not previously attempted with CA-NEAT.
 
 \section{CA-NEAT Implementation}
 \label{sec:implementation}
+TODO
 
+\begin{figure}
+\centering
+\begin{multicols}{3}
+\begin{enumerate}
+    \item Sigmoid
+    \item Hyperbolic tangent
+    \item Sinusoid
+    \item Gaussian
+    \item Rectified linear unit
+    \item Identity
+    \item Clamped
+    \item Inverse
+    \item Logarithmic
+    \item Exponential
+    \item Absolute value
+    \item Hat
+    \item Square
+    \item Cube
+\end{enumerate}
+\end{multicols}
+\caption{Possible activation functions}
+\label{fig:activations}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=.5\columnwidth]{fig/single_layer_cppn}
+\caption
+[Example first-generation CPPN with 7 out of 10 possible connections.]
+{Example first-generation CPPN with 7 out of 10 possible connections. $N=5$ input nodes corresponds to the "Von Neumann" neighbourhood shape, and $K=2$ output nodes correspond to a binary CA.}
+\label{fig:single_layer_cppn}
+\end{figure}
+
+The nodes of the evolved CPPNs can have any of the activation functions listed in Figure \ref{fig:activations}.
+
+\input{methodology/novelty}
+\input{methodology/properties}
 \input{methodology/morphXY}
 \input{methodology/majority}
 \input{methodology/synchronization}
+\input{methodology/fss}
+\input{methodology/novelty}
