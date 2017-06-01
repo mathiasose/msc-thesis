@@ -1,5 +1,5 @@
 \clearpage
-\pagenumbering{roman} 				
+\pagenumbering{roman}
 \setcounter{page}{1}
 
 \pagestyle{fancy}
@@ -15,6 +15,16 @@
 \addcontentsline{toc}{chapter}{Summary}	
 $\\[0.5cm]$
 
-\noindent Write your summary here...
+\noindent
+Traditional \textit{Cellular Automata} (CA) transition tables grow quickly when the number of cell states or the size of the CA neighborhood increases.
+For methods that search for good transition functions, such as genetic algorithms, the space of possible tables also grows rapidly with both parameters.
+This paper investigates replacing the tables with \textit{Compositional Pattern Producing Networks} (CPPNs), a Neural Network-like encoding.
+The search for good CPPN-based transition encodings is performed with the \textit{NeuroEvolution of Augmenting Topologies} (NEAT) genetic algorithm.
+
+A software framework is implemented and the problems of 2D pattern morphogenesis and replication are investigated.
+The results found are diverse, with some problems solved easily, some with moderate difficulty and some not at all.
+The conclusion is that the idea shows promise, but further work is required to truly understand how the parts of the system interact and which configurations are suitable for which problems.
+
+TODO update this
 
 \clearpage

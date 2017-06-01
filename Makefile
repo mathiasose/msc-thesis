@@ -1,8 +1,9 @@
-.PHONY: clean all watch ignore-report add-report
+.PHONY: clean all watch ignore-report add-report spellcheck
 FILE=thesis
 TEX=$(FILE).tex
 PDF=$(FILE).pdf
 TEXMAKE=latexmk -pdf
+TEX_FILES = $(wildcard **/*.tex)
 
 all: $(PDF)
 
@@ -27,3 +28,8 @@ clean:
 
 remove: clean
 	rm $(PDF)
+
+spellcheck: $(addsuffix .spchk,$(basename $(TEX_FILES)))
+
+%.spchk: %.tex
+	@aspell --lang=en-US -t -c $<

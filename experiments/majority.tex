@@ -1,0 +1,19 @@
+\section{Majority Problem}
+The \textit{majority problem} is a problem for 1D binary CA.
+It is also called the \textit{density classification task} in literature \cite{mitchell1993revisiting, mitchell1996evolving}.
+In this task, the CA should have some arbitrary initial configuration where one "color" (black/white) is more common than the other.
+The CA must then figure out which color this is and end up in a point attractor state where all the cells are of this color.
+Depending on the initial configuration this can be easy, or very difficult, so finding a general solution that can figure out any initial configuration is difficult.
+Even if the majority of the configuration is black, there might be a sub-region that is majority white.
+The lack of global overview means that the CA needs to send information around the grid and "negotiate" a consensus about the color.
+This problem has been studied extensively with table-based transition functions found by genetic algorithm \cite{mitchell1993revisiting, mitchell1996evolving, mitchell-2001} 
+
+The experiment design here is inspired by the design in TODO cite.
+
+10 initial configurations are created with a specific ratio of black and white cells, but in a random order.
+Five are white-dominated and five are black-dominated.
+The fitness function tests the rule on each of the configurations and calculates whether the 
+
+\subsection{Results}
+TODO
+

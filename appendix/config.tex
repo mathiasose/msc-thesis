@@ -1,0 +1,48 @@
+\chapter{CA-NEAT Parameters}
+\label{app:parameters}
+CA-NEAT has a large number of parameters that affect the outcome of the experiments.
+This appendix lists some notable ones that would be needed to reproduce the results in this thesis consistently.
+
+\begin{lstlisting}[language=Python, caption={
+Parameters that define the initial population.
+Notably, for each generated individual,
+the ratio of connectivity is determined individually to be a value between $0.5$ and $1.0$.
+}]
+    initial_hidden_nodes = 0
+    initial_connection = 'partial'
+    connection_fraction = lambda *args: 0.5 * (1 + random.random())
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={
+Parameters that have to do with selection and speciation
+}]
+    survival_threshold = 0.2
+    stagnation_limit = 15
+    compatibility_threshold = 3.0
+    excess_coefficient = 1.0
+    disjoint_coefficient = 1.0
+    weight_coefficient = 0.5
+\end{lstlisting}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python, caption={
+Parameters that have to do with mutation
+}]
+    max_weight = 30
+    min_weight = -30
+    weight_stdev = 1.0
+    prob_add_conn = 0.5
+    prob_add_node = 0.5
+    prob_delete_conn = 0.25
+    prob_delete_node = 0.25
+    prob_mutate_bias = 0.8
+    bias_mutation_power = 0.5
+    prob_mutate_response = 0.8
+    response_mutation_power = 0.5
+    prob_mutate_weight = 0.8
+    prob_replace_weight = 0.1
+    weight_mutation_power = 0.5
+    prob_mutate_activation = 0.002
+    prob_toggle_link = 0.01
+\end{lstlisting}
+\end{minipage}

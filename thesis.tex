@@ -13,7 +13,7 @@
 
 %% PART 1
 %%The title page will be automatically generated and added by the DAIM system
-\input{dedication.tex}		%% Optional
+%\input{dedication.tex}		%% Optional
 
 %% PART 2
 \input{summary.tex}		%% Optional
@@ -37,25 +37,27 @@
 \mainmatter
 
 %% PART 3 -- The Chapters
-\input{intro.tex}		%% Edit each chapter
+\input{intro.tex}
 \cleardoublepage
 \input{background.tex}
 \cleardoublepage
-\input{related_work.tex}
+%\input{related_work.tex}
+%\cleardoublepage
+%\input{previous_work.tex}
+%\cleardoublepage
+\input{implementation.tex}
 \cleardoublepage
-\input{previous_work.tex}
+\input{experiments.tex}
 \cleardoublepage
-\input{methodology.tex}
-\cleardoublepage
-\input{results.tex}
-\cleardoublepage
+%\input{results.tex}
+%\cleardoublepage
 \input{discussion.tex}
 \cleardoublepage
 \input{conclusion.tex}
 \cleardoublepage
 
 %% PART 4
-\input{references.tex}	%% Edit your references in "mylib.bib"
-\input{appendix.tex}		%% Optional
+\input{references.tex}
+\input{appendix.tex}
 
 \end{document}

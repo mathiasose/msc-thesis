@@ -1,3 +1,45 @@
-\chapter{Discussion}
+\chapter{Discussion \& Future Work}
+The individual experiments are discussed in their sections in Chapter \ref{chap:experiments}.
+This chapter discusses the overarching themes, what went well and not so well, and the possibilities for future work.
+
+\section{Morphology Problems}
+Morphology of all the patterns in Figure \ref{fig:patterns} has been achieved,
+either using only neighborhood information or using neighborhood information in conjunction with coordinate information.
+In comparison with table-based and instruction-based evolution, CA-NEAT did better than either in most cases.
+
+Replication was only tested with neighborhood information,
+and the results were in general better than the corresponding results with table-based evolution,
+though not as good as the results of instruction-based evolution.
+With positive results from the morphogenesis with coordinate information,
+it seems likely that the replication performance can also be improved by adding information to the environment.
+For example, the environment could be augmented with "anchor points" in cells at intervals, giving the CA something to "latch on to" when producing duplicates.
+
+\section{Computational Problems}
 TODO
 
+\section{The Role of CA-NEAT Mechanisms and Parameters}
+TODO
+
+\section{Novelty Search}
+The choice of the enumerated mapping string to measure the innovation distance between phenotypes in novelty search has some disadvantages.
+It "reintroduces" the restrictions of table-based transition functions to CA-NEAT.
+It can't handle other types of input (e.g. like in Section \ref{sec:morphXY}),
+and as the size of the neighbourhood or the number of cell states increases, so does the computational complexity of creating the strings and comparing them.
+
+This does not mean CA-NEAT and novelty search are incompatible.
+Other properties of the CA-NEAT transition function could be used to measure innovation distance.
+These properties could be task-specific.
+For example, in a morphogenesis task where finding a point attractor is required, the final (stable) state of the CA could be used as a vector,
+and distance calculated appropriately.
+
+When implementing CA-NEAT, the choice of database for persisting results was a relational (SQL) database.
+When CA-NEAT was extended to novelty search, this meant that the innovation archive was also implemented as relational table.
+As the innovation archive grew larger during experiments, it became obvious that this had a large detrimental effect on the performance of the algorithm, both in terms of time spent calculating and in terms of memory used during calculations.
+The whole innovation archive was loaded into memory,
+and the Hamming distances were calculated between the whole generation of individuals and the whole of the archive.
+If implementing novelty search from scratch, a more suitable database structure could be used instead.
+Inspiration could be taken from the techniques used in embedding spaces in machine learning applications.
+
+Another possible option is to use the innovation archive population as a diverse initial population for normal NEAT.
+It is possible some of the genotypes in the archive are close to, but not quite optimal, and that some generation of objective search evolution could lead to optimal results.
+It would probably be neccessary to sample the archive though, as it may be much larger than the size of a population in normal NEAT.

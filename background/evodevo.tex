@@ -1,9 +1,7 @@
 \section{Artificial Evolution and Development}
-TODO rewrite
-
-\textit{Artificial development} and \textit{artificial evolution} takes inspiration from biology in order to explore large and complex solution spaces for some given problem.
-
-In a typical \textit{genetic algorithm} (GA) setup \cite{mitchell-2001},
+\textit{Artificial development} and \textit{artificial evolution} (evo-devo) takes inspiration from biology in order to explore large and complex solution spaces for some given problem.
+% In morphogenetic engineering evo-devo is part of the third category TODO
+In a typical \textit{genetic algorithm} (GA) setup \cite{holland1992genetic, mitchell-2001},
 relatively simple representations of solutions are encoded as \textit{genotypes} (also called \textit{genomes}).
 Through some \textit{development process} a genotype may be transformed into a \textit{phenotype} which can be used to attempt to solve the problem at hand.
 The performance of the phenotype at solving the problem is the \textit{fitness} of that individual genotype.
@@ -11,6 +9,9 @@ The performance of the phenotype at solving the problem is the \textit{fitness} 
 The fitnesses of a \textit{population} of different individuals are compared.
 A selection process picks individuals from the population that get to reproduce.
 This selection process is usually stochastic, with a bias towards picking the individuals with the highest fitness, but some chance of picking a less fit individual now and then.
+An optional part of selection can be to eliminate some fraction of the population that performed poorly, excluding them from pair selection entirely.
+This is analogous to creatures in nature dying before reaching sexual maturity.
+The combination of these concepts creates a \textit{selection pressure} that drives the overall population towards higher average fitness.
 
 Individuals that are selected for reproduction are paired up.
 The genotypes of the pair are combined in some fashion to create a new genotype.
@@ -34,6 +35,36 @@ Indirect encodings allows the evolutionary search to explore a space of genotype
 This is the way development happens in nature, where simple genomes are developed into complex lifeforms \cite{clune2011performance}.
 
 \subsection{NEAT}
+\begin{figure}
+\centering
+\begin{subfigure}[t]{.5\columnwidth}
+\centering
+\includegraphics[height=5cm, keepaspectratio]{fig/NEAT_gt}
+\caption{Genotype}
+\end{subfigure}\hfill%
+\begin{subfigure}[t]{.5\columnwidth}
+\centering
+\includegraphics[height=5cm, keepaspectratio]{fig/NEAT_pt}
+\caption{Phenotype}
+\end{subfigure}
+\caption[Example NEAT genotype and phenotype]{
+An example NEAT genotype and corresponding phenotype.
+This example only shows the topology that the genotype encodes, leaving out the weights, biases and activation functions.
+}
+\label{fig:neat}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth, keepaspectratio]{fig/NEAT_mutation}
+\caption[Example of NEAT mutation]{
+    An illustrated example of NEAT mutation starting with a basic network of only two inputs and one output.
+    Through the sequence, neurons and connections are added until the network is equal to that in Figure \ref{fig:neat}.
+    This example shows only mutation, leaving out the crossover operation which is also part of NEAT.
+    }
+\label{fig:neat_mutation}
+\end{figure}
+
 \textit{NeuroEvolution of Augmenting Topologies} (NEAT) is a genetic algorithm variant introduced by Stanley and Miikkulainen in 2002 \cite{stanley-2002},
 designed specifically to evolve ANNs.
 When introducing CPPNs \cite{stanley-2007}, Stanley also introduced the CPPN-NEAT variation of the algorithm.
@@ -44,6 +75,7 @@ NEAT starts with an initial population of very simple networks, typically with j
 Over generations, more nodes and vertices are added or disabled, activation functions are changed, and weights are adjusted.
 The process of gradually expanding the genome is called \textit{complexification},
 and reflects how life on earth is believed to have started with simple organisms and gradually evolved into more complex creatures \cite{darnell1986speculations,pross2005emergence}.
+Figure \ref{fig:neat_mutation} shows an example of how mutation could gradually complexify a NEAT phenotype network.
 
 The genes that make up a NEAT genome are marked with an \textit{innovation number} so that they may be recognized as the same gene in different individuals.
 As new features are added to the genomes, the individuals making up the population become gradually less similar.
@@ -59,38 +91,6 @@ the feature will not be tuned and likely affect the fitness of the individuals n
 NEAT protects new species for a certain amount of time,
 allowing them time to adjust before being evaluated and, if performing poorly, being extincted to make more room for the more fit species.
 
-\begin{figure}
-\centering
-\begin{subfigure}[t]{.5\columnwidth}
-\centering
-\includegraphics[height=5cm, keepaspectratio]{fig/NEAT_gt}
-\caption{Genotype}
-\end{subfigure}\hfill%
-\begin{subfigure}[t]{.5\columnwidth}
-\centering
-\includegraphics[height=5cm, keepaspectratio]{fig/NEAT_pt}
-\caption{Phenotype}
-\end{subfigure}
-
-\caption[Example NEAT genotype and phenotype]{
-An example NEAT genotype and corresponding phenotype.
-This example only shows the topology that the genotype encodes, leaving out the weights and activation functions.
-}
-\label{fig:neat}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=\columnwidth, keepaspectratio]{fig/NEAT_mutation}
-\caption[Example of NEAT mutation]{
-    An illustrated example of NEAT mutation starting with a basic network of only two inputs and one output.
-    Through the sequence neurons and connections are added until the network is equal to that in Figure \ref{fig:neat}.
-    This example shows only mutation of genomes, leaving out the crossover operation which is also part of NEAT.
-    }
-\label{fig:neat_mutation}
-\end{figure}
-
-
 One notable use case of NEAT is called \textit{HyperNEAT} \cite{stanley2009hypercube}.
 In this process, NEAT is used to evolve CPPNs whose output determine the topology of ANNs.
 This is useful because it allows the ANN to scale easily, since the CPPN can just take more input and output more topology.
@@ -98,12 +98,17 @@ If the evolved CPPN has useful output at a small scale, it should also have a us
 
 \subsection{Novelty Search}
 \textit{Novelty search} is another genetic algorithm variant, introduced by Joel Lehmann and Kenneth O. Stanley in 2008 \cite{lehman-2008}.
-It is good at \textit{deceptive} tasks, where local maximas in the fitness landscape do not lead to the global maximum, and thus "deceives" conventional algorithms.
-Novelty search avoids this by eschewing the fitness measure entirely, and instead rewards \textit{innovation}, giving higher scores to genotypes that exhibit previously unseen behavior.
-To find what behavior is new, an archive of seen behaviors is kept.
+It is designed to be good at \textit{deceptive} tasks, where local maximas in the fitness landscape can "deceive" conventional algorithms and prevent the search from finding the global maximum.
+
+Novelty search avoids this by eschewing the fitness measure entirely during the search,
+and instead rewards \textit{innovation}, giving higher scores to individuals that exhibit previously unseen behavior.
+To find what behavior is new, an archive of seen behaviors is maintained.
 A \textit{distance metric} must be selected that is appropriate for the problem at hand.
 For example, if the behavior of the phenotypes produces strings, an \textit{edit distance} measure such as the \textit{Levenshtein distance} can be used.
-For each genotype the k nearest neighbors are found, and the average of these distances can be used as the \textit{novelty metric}.
+For each genotype the $k$ nearest neighbors (in terms of behavior) are found, and the average of these distances can be used as the \textit{novelty metric}.
 If a new behavior is sufficiently novel, it is added to the archive.
 
-TODO a bit more?
+The algorithm is otherwise equal to NEAT, with the novelty score substituting for the objective fitness score.
+This produces a population with a large variation of behaviors.
+The hope is that this way, some individual "stumbles" into the global maxima.
+Whether this has occurred can be determined by using the objective fitness test on the individuals of the archive.

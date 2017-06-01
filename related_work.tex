@@ -1,15 +1,20 @@
-\chapter{Related Work}
-TODO rewrite and expand
-
-In \cite{wolper-2015}, Wolper and Abraham used evolution and CPPNs to find seed patterns for Conway's Game of Life \cite{berlekamp1982winning}.
-They tried both normal CPPN-NEAT (objective search) and a variation called novelty search \cite{lehman-2008}.
+\section{Related Work}
+In \cite{wolper-2015}, Wolper and Abraham used evolution and CPPNs to find seed patterns for Conway's Game of Life \cite{berlekamp1982winning},
+but not for finding transition rules.
+They tried both normal CPPN-NEAT (objective search) and novelty search.
 The results were varied, but the conclusion was in support of further research into using CPPNs for CA problems.
 
 Many different kinds of CA encodings have been investigated previously.
-These include \textit{conditionally matching rules} \cite{bidlo2013evolution, bidlo2015investigation, bidlo2015routine},
-\textit{instruction-based development} \cite{bidlo2008instruction, bidlo2012evolution, nichele2016genotype,nichele2014evolutionary,nichele2016evolutionary}
-\textit{self-modifying cartesian genetic programming} \cite{harding2011self}
-and \textit{variable length gene regulatory networks} \cite{trefzer2013advantages}.
-The paper \cite{nichele2014evolutionary} by Nichele and Tufte investigates an instruction based encoding.
-%The experiments in this paper repeat those of that paper, using the new CPPN encoding.
+With \textit{Conditionally matching rules} \cite{bidlo2013evolution, bidlo2015investigation, bidlo2015routine},
+the table of transition rules is not a complete enumeration of all possible inputs,
+but a sequence of conditions that, if all asserted, determine the next state of the cell.
+In \textit{instruction-based development} \cite{bidlo2008instruction, bidlo2012evolution, nichele2016genotype,nichele2014evolutionary,nichele2016evolutionary},
+the transition function encodes a set of instructions (a small program if you will) that transforms act on the input to produce the output.
+With \textit{self-modifying cartesian genetic programming} \cite{harding2011self},
+the transition function is a genetic program.
+In \textit{variable length gene regulatory networks} \cite{trefzer2013advantages},
+the genomes encode networks that mimic the network of cells found in nature.
+
+Nichele and Tufte \cite{nichele2014evolutionary, nichele2016evolutionary, nichele2016genotype} has studied complexification during evolution,
+both with table-based encodings and with instruction-based encodings.
 

@@ -1,3 +1,27 @@
 \chapter{Introduction}
-TODO
+\textit{Cellular Automata} (CA) were first conceptualized and introduced in the 1940's and 1950's.
+Around the same time, the idea of the \textit{evolutionary algorithm} was also being developed independently.
+Both of these concepts take inspiration from nature, and thus fall into the category of \textit{artificial life}.
+One goal of this field of research is to create systems that are of complexity comparable to that of biological systems found in nature.
 
+One way to try to achieve this goal is to combine these two distinct concepts: Cellular systems designed by evolution.
+Many different kinds of tasks have been solved by cellular systems that have been created this way.
+However, more complex tasks and more complex models means greater spaces of possible solutions that the evolutionary algorithm must search.
+%This phenomenon is seen in many fields, and is often referred to as "the curse of dimensionality" (TODO citation).
+For a traditional genetic algorithm it can be both time consuming and challenging to find good solutions.
+
+One of the possible ways to remedy this problem is to replace the traditional table-based encoding of CA transition rules with a different encoding: an encoding that supports a more complex evolutionary algorithm.
+This paper describes the investigation of using \textit{Compositional Pattern Producing Networks} (CPPNs) as the data structure for transition rules,
+and the \textit{NeuroEvolution of Augmenting Topologies} (NEAT) genetic algorithm for evolving these CPPNs.
+
+With CPPN-based transition functions there is not a linear relationship between the input-output size and the size of the encoding.
+The algorithm starts with the smallest possible encoding and iteratively over time adds features to it and adjusts them until an optimal solution is found.
+This \textit{complexification} mimics the process that biologists believe life on earth developed.
+
+To test this new combination, which we call \textit{CA-NEAT},
+a custom Python framework was built to run simulations in software.
+The framework was tasked with solving various CA tasks of different difficulties, with different degrees of success.
+
+TODO research question
+
+TODO outline thesis

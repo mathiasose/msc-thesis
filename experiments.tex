@@ -1,0 +1,31 @@
+\chapter{Experiments}
+\label{chap:methodology}
+\label{chap:experiments}
+
+\section{Overarching Methodology}
+Several of the following sections are about selecting a CA problem and letting CA-NEAT have a go at solving it.
+In these experiments, the same basic configuration of CA-NEAT is used.
+The size of the CA neighborhood (equal to the number of CPPN inputs) and the number of cell-states (equal to the number of CPPN outputs) is changed to be appropriate to the problem at hand.
+The fitness evaluation function is also custom to every problem.
+
+Otherwise the CA-NEAT parameters are the same across different experiments.
+These are listed in Appendix TODO.
+%Notably, the mutation weigths are biased towards adding nodes and connections moreso than removing them, leading to the average network size growing over time.
+
+Each experiment consists of 100 independent runs with the same parameters but different initial populations.
+All experiments have a population size of 200 individuals and elitism degree of 1.
+Each generation-population is segregated into species by NEAT, with selection and reproduction happening within these groups.
+\textit{Sigma scaled selection} \cite{hancock-1994} is used to select pairs for reproduction.
+
+During development of the system, a variation of different configurations were tried for different problems.
+When deciding on the experiments to collect results from for this paper,
+a deliberate choice was made to use the same CPPN-NEAT configuration and as close to the same CA configuration as possible for all problems.
+This makes it easier to make comparison between experiments, but means that the settings chosen may favor some experiments over others.
+
+\input{experiments/previous_work}
+\input{experiments/morphXY}
+\input{experiments/majority}
+\input{experiments/synchronization}
+%\input{experiments/fss}
+\input{experiments/properties}
+\input{experiments/novelty}
